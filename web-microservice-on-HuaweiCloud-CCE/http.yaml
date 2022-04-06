@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-microservice
+  labels:
+    app: v2
+spec:
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0 
+  selector:
+    matchLabels:
+      app: v2
+  template:
+    metadata:
+      labels:
+        app: v2
+    spec:
+      containers:
+      - name: httpd
+        image: httpd
